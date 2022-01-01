@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:audioplayers/audio_cache.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 void main() => runApp(XylophoneApp());
 
 class XylophoneApp extends StatelessWidget {
-  void playSound(int soundNumber) {
+  void playSound(int soNum) {
     final player = AudioCache();
-    player.play('note$soundNumber.wav');
+    player.play('note$soNum.wav');
   }
-
-  Expanded buildKey({Color color, int soundNumber}) {
+  Expanded buildKey(Color color,int soNum) {
     return Expanded(
-      child: FlatButton(
-        color: color,
+      child: TextButton(
+        style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(color)
+        ),
         onPressed: () {
-          playSound(soundNumber);
+          playSound(soNum);
         },
+        //style: TextButton.styleFrom(backgroundColor: Colors.color),
+        child: null,
       ),
     );
   }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -27,16 +29,17 @@ class XylophoneApp extends StatelessWidget {
         backgroundColor: Colors.black,
         body: SafeArea(
           child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                buildKey(color: Colors.red, soundNumber: 1),
-                buildKey(color: Colors.orange, soundNumber: 2),
-                buildKey(color: Colors.yellow, soundNumber: 3),
-                buildKey(color: Colors.green, soundNumber: 4),
-                buildKey(color: Colors.teal, soundNumber: 5),
-                buildKey(color: Colors.blue, soundNumber: 6),
-                buildKey(color: Colors.purple, soundNumber: 7),
-              ],
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              buildKey( Colors.red,1),
+              buildKey(Colors.orange,1),
+              buildKey(Colors.yellow,1),
+              buildKey(Colors.green,1),
+              buildKey(Colors.blue,1),
+              buildKey(Colors.grey,1),
+              buildKey(Colors.purple,1),
+            ],
           ),
         ),
       ),
